@@ -210,7 +210,9 @@ def waitForConsolidatedField(request):
         return {'success':success,'message':'Invalid paper id'}, 404
     field = request.GET.get('field')
     value = None
+    print "pre_conso"
     paper.consolidate_metadata(wait=True)
+    print "post_conso"
     if field == 'abstract':
         value = kill_html(paper.abstract)
         success = len(paper.abstract) > 64

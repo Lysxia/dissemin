@@ -111,11 +111,16 @@ class PaperAjaxTest(JsonRenderingTest):
     def test_consolidate_paper(self):
         p = Paper.create_by_doi('10.1175/jas-d-15-0240.1')
         self.client.login(username='terry',password='yo')
-        result = self.checkJson(self.getPage(
+        print "X1"
+        page = self.getPage(
                 'ajax-waitForConsolidatedField', getargs={
                     'field':'abstract',
-                    'id': p.id}))
+                    'id': p.id})
+        print "X2"
+        result = self.checkJson(page)
+        print "X3"
         self.client.logout()
+        print "X4"
         self.assertTrue(result['success'])
         self.assertTrue(len(result['value']) > 10)
 
