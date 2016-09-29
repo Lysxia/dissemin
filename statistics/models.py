@@ -193,12 +193,7 @@ class BareAccessStatistics(object):
                 'value': self.__dict__['num_'+key],
                 }
             detailed_data.append(item)
-        # Gives the translated label
-        aggregated_labels = []
-        for (key, desc) in PDF_STATUS_CHOICES:
-            item = {'label': unicode(desc)}
-            aggregated_labels.append(item)
-        return {'detailed': detailed_data, 'aggregated': aggregated_labels}
+        return {'detailed': detailed_data, 'num_tot': self.num_tot}
 
     @property
     def num_available(self):
