@@ -7,11 +7,11 @@ from .models import Paper
 class PaperIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, model_attr='title')
     pubdate = indexes.DateField(model_attr='pubdate')
-    combined_status = indexes.CharField(model_attr='combined_status')
-    doctype = indexes.CharField(model_attr='doctype')
+    combined_status = indexes.CharField(model_attr='combined_status', indexed=False)
+    doctype = indexes.CharField(model_attr='doctype', indexed=False)
     visible = indexes.BooleanField(model_attr='visible')
-    oa_status = indexes.CharField(model_attr='oa_status')
-    availability = indexes.CharField()
+    oa_status = indexes.CharField(model_attr='oa_status', indexed=False)
+    availability = indexes.CharField(indexed=False)
 
     #: Names of the authors
     authors_full = indexes.MultiValueField()
