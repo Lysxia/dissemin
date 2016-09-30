@@ -52,6 +52,14 @@ COMBINED_STATUS_CHOICES = [
     ('closed', _('Publisher forbids sharing')),
     ]
 
+#: Simplified user status merging 'oa' and 'ok'.
+SIMPLE_STATUS_CHOICES = [
+    ('ok', _('Freely available')),
+    ('couldbe', _('Could be shared by the authors')),
+    ('unk', _('Unknown/unclear sharing policy')),
+    ('closed', _('Publisher forbids sharing')),
+]
+
 #: Helptext displayed when a paper logo is hovered
 STATUS_CHOICES_HELPTEXT = {
     'oa': _('This paper is made freely available by the publisher.'),
@@ -186,12 +194,15 @@ class BareAccessStatistics(object):
         the statistics as a pie.
         """
         detailed_data = []
-        for (key, desc) in COMBINED_STATUS_CHOICES:
+        for (key, desc) in SIMPLE_STATUS_CHOICES:
             item = {
                 'id': key,
                 'label': unicode(desc),
-                'value': self.__dict__['num_'+key],
-                }
+                'value': (
+                    self.num_available if key == 'ok' else
+                    self.__dict__['num_'+key]
+                ),
+            }
             detailed_data.append(item)
         return {'detailed': detailed_data, 'num_tot': self.num_tot}
 

@@ -20,7 +20,7 @@
 
 from __future__ import unicode_literals
 
-from statistics.models import COMBINED_STATUS_CHOICES
+from statistics.models import SIMPLE_STATUS_CHOICES
 from statistics.models import PDF_STATUS_CHOICES
 
 #from bootstrap3_datepicker.fields import DatePickerField
@@ -80,7 +80,7 @@ class PaperForm(SearchForm):
         ('inc', _('increasing')),
     ]
     status = forms.MultipleChoiceField(
-        choices=COMBINED_STATUS_CHOICES,
+        choices=SIMPLE_STATUS_CHOICES,
         widget=forms.CheckboxSelectMultiple,
         required=False)
     DATE_FORMATS = ['%Y-%m-%d', '%Y-%m', '%Y']
@@ -161,6 +161,8 @@ class PaperForm(SearchForm):
 
         status = self.cleaned_data['status']
         if status:
+            if 'ok' in status:
+                status.append('oa')
             self.queryset = self.queryset.post_filter(
                 combined_status__in=status)
 

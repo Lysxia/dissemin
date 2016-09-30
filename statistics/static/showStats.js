@@ -7,10 +7,6 @@ function readablizeNumber (number) {
 }
 
 function preProcessData(data) {
-    // Merge the first two categories
-    data.detailed[1].value += data.detailed[0].value
-    data.detailed = data.detailed.slice(1)
-
     for (var i = 0; i < 4; i++) {
         detail = data.detailed[i]
         if (data.on_statuses.length === 0 || -1 !== $.inArray(detail.id, data.on_statuses)) {
@@ -28,7 +24,7 @@ function showStatsPie (data, target_id) {
     preProcessData(data)
 
     var detailed_data = data.detailed
-    var w = 201, h = 145;
+    var w = 201, h = 111;
 	var r = 100, mr = 30; // radii
     var color = d3.scale.ordinal().range(stats_colors);
 

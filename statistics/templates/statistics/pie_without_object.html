@@ -23,7 +23,7 @@
         <span class="stats_caption_label">
           <span class="stats_caption_label_text">{{ status.choice_label }}</span>
           <span class="detail">
-            {% cycle stats.num_oa stats.num_ok stats.num_couldbe stats.num_unk stats.num_closed %}
+            {% cycle stats.num_available stats.num_couldbe stats.num_unk stats.num_closed %}
           </span>
         </span>
       {% if combined_status_form %}

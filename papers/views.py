@@ -20,7 +20,7 @@
 from __future__ import unicode_literals
 
 import json
-from statistics.models import COMBINED_STATUS_CHOICES
+from statistics.models import SIMPLE_STATUS_CHOICES
 from statistics.models import combined_status_stats
 
 from allauth.socialaccount.signals import post_social_login
@@ -98,7 +98,7 @@ def index(request):
         'search_form': FrontPageSearchForm(),
         'combined_status':
             [{'choice_value': v, 'choice_label': l}
-             for v, l in COMBINED_STATUS_CHOICES]
+             for v, l in SIMPLE_STATUS_CHOICES]
         }
     return render(request, 'papers/index.html', context)
 
